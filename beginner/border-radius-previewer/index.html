@@ -1,14 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Border Radius Previwer</title>
-</head>
-<body>
-    
 
-    <script></script>
-</body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      main {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .input-wrapper {
+        display: flex;
+        gap: 6rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .box {
+        width: 250px;
+        height: 250px;
+        background: #fff;
+        border: 2px solid #555;
+        box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="input-groud input-wrapper top">
+        <input class="form-control" type="number" value="0" id="top-left" />
+        <input class="form-control" type="number" value="0" id="top-right" />
+      </div>
+
+      <div class="box"></div>
+
+      <div class="input-groud input-wrapper bottom">
+        <input class="form-control" type="number" value="0" id="bottom-left" />
+        <input class="form-control" type="number" value="0" id="bottom-right" />
+      </div>
+
+      <input disabled class="form-control result" value="border-radius: 0px 0px 0px 0px;" />
+
+      <button class="btn btn-primary" onclick="copyToClipboard()">Copy to clipboard</button>
+    </main>
+
+    <script>
+      const topLeft = document.querySelector("#top-left");
+      const topRight = document.querySelector("#top-right");
+      const bottomLeft = document.querySelector("#bottom-left");
+      const bottomRight = document.querySelector("#bottom-right");
+
+      const box = document.querySelector(".box");
+
+      const result = document.querySelector(".result");
+
+      topLeft.addEventListener("input", () => {
+        box.style.borderTopLeftRadius = `${topLeft.value}px`;
+        updateResult();
+      });
+
+      topRight.addEventListener("input", () => {
+        box.style.borderTopRightRadius = `${topRight.value}px`;
+        updateResult();
+      });
+
+      bottomLeft.addEventListener("input", () => {
+        box.style.borderBottomLeftRadius = `${bottomLeft.value}px`;
+        updateResult();
+      });
+
+      bottomRight.addEventListener("input", () => {
+        box.style.borderBottomRightRadius = `${bottomRight.value}px`;
+        updateResult();
+      });
+
+      function updateResult() {
+        result.value = `border-radius: ${topLeft.value}px ${topRight.value}px ${bottomLeft.value}px ${bottomRight.value}px;`;
+      }
+
+      async function copyToClipboard() {
+        result.select();
+        result.setSelectionRange(0, 99999);
+        await navigator.clipboard.writeText(result.value);
+      }
+    </script>
+  </body>
 </html>
