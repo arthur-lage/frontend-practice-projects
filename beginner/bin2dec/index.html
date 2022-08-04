@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bin2Dec</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      #convertButton {
+        letter-spacing: 1px;
+        min-width: 225px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="mt-5 text-center">Binary To Decimal</h1>
+
+    <div class="d-flex flex-column p-5">
+      <div class="input-group d-flex flex-column">
+        <label class="mb-2" for="binaryInput">Binary</label>
+        <input
+          type="text"
+          class="form-control w-100"
+          id="binaryInput"
+          placeholder="Type your binary number here. Eg: 101"
+        />
+      </div>
+
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <button
+          id="convertButton"
+          type="button"
+          class="fs-5 fw-semibold text-uppercase my-3 btn btn-primary"
+          onclick="convert()"
+        >
+          Convert
+        </button>
+      </div>
+
+      <div class="input-group d-flex flex-column">
+        <label class="mb-2" for="decimalInput">Decimal</label>
+        <input
+          type="text"
+          class="form-control w-100"
+          disabled
+          id="decimalInput"
+          placeholder="Your conversion result will appear here..."
+        />
+      </div>
+    </div>
+
+    <script>
+      const binaryToDec = (number) => {
+        return parseInt(number, 2);
+      };
+
+      const convert = () => {
+        const binaryInput = document.querySelector("#binaryInput");
+        const decimalInput = document.querySelector("#decimalInput");
+
+        if (binaryInput.value.length > 8 || binaryInput.value.length == 0) {
+          return console.log("error");
+        }
+
+        for (let i = 0; i < binaryInput.value.length; i++) {
+          if (binaryInput.value[i] != "0" && binaryInput.value[i] != "1") {
+            return console.log("wrong");
+          }
+        }
+
+        const result = binaryToDec(Number(binaryInput.value));
+
+        decimalInput.value = result;
+      };
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
